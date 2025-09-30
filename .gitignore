@@ -1,0 +1,47 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+*.log.*
+
+# Runtime
+.DS_Store
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage / testing
+coverage/
+.nyc_output/
+
+# Build artifacts
+dist/
+build/
+.cache/
+.tmp/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Frontend (if you build static assets later)
+public/*.map
+public/bundle*.js
+public/bundle*.css
+
+# Misc
+*.tgz

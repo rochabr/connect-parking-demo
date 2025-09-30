@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Parking Checkout (Connect)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <div class="logo-dot"></div>
+          <div>
+            <div class="brand-title">Parking Checkout</div>
+            <div class="brand-sub">Stripe Connect demo</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a class="nav-link" href="./return.html">Return page</a>
+          <a class="nav-link" target="_blank" href="https://dashboard.stripe.com/test">Stripe Dashboard</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Step 1: Customer -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title">1. Choose customer</h2>
+          <div class="section-actions">
+            <button id="refreshCustomers" class="btn ghost" title="Refresh">↻</button>
+          </div>
+        </div>
+        <div id="customerGrid" class="grid"></div>
+        <p class="hint">Showing existing Stripe <span class="mono">Customer</span> objects from your account (max 50).</p>
+      </section>
+
+      <!-- Step 2: Parking lot (Connected account) -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title">2. Select parking lot</h2>
+          <div class="section-actions">
+            <button id="refreshAccounts" class="btn ghost" title="Refresh">↻</button>
+          </div>
+        </div>
+        <div id="accountGrid" class="grid"></div>
+        <p class="hint">Funds route to the selected Connected account via <span class="mono">destination charges</span> with <span class="mono">on_behalf_of</span>.</p>
+      </section>
+
+      <!-- Step 3: Parking spot (product option) -->
+      <section class="section-card">
+        <div class="section-header">
+          <h2 class="section-title">3. Choose parking spot</h2>
+        </div>
+        <div id="spotGrid" class="grid grid-3"></div>
+        <p id="priceHint" class="price-hint">Price shown after you select a parking lot (varies by currency). MX ×20, CA +30%.</p>
+      </section>
+
+      <!-- Checkout -->
+      <section class="section-card">
+        <div class="cta-row">
+          <button id="start" class="btn primary">Start / Update checkout</button>
+          <span id="status" class="status-text"></span>
+        </div>
+        <div id="checkout" class="checkout-frame"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="foot-left">© Demo • For testing only</div>
+        <div class="foot-right">
+          <span class="chip">USD</span>
+          <span class="chip">CAD (+30%)</span>
+          <span class="chip">MXN (×20)</span>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
