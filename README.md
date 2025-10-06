@@ -7,10 +7,6 @@ It simulates a parking platform where:
 - You pick a **Parking Lot** (a Connected account in US, CA, or MX).
 - You choose a **Parking Spot option** (Standard / Covered / VIP).
 - A **Checkout Session** is created on behalf of that Connected account.  
-- Pricing rules:
-  - US = base price
-  - Canada = +30%
-  - Mexico = ×20
 
 Funds are routed to the selected Connected account using **destination charges** with `on_behalf_of`.
 
@@ -65,7 +61,6 @@ Funds are routed to the selected Connected account using **destination charges**
    - Flag shows country  
    - Currency is determined by account country
 4. Pick a **Spot Option** (Standard, Covered, VIP)  
-   - Price adjusts by rules (US base, CA +30%, MX ×20)
 5. Click **Start / Update checkout**  
    - Stripe Embedded Checkout mounts in-page
 6. Complete checkout with Stripe test cards  

@@ -99,8 +99,6 @@ function cardSpot(o, currency, country) {
         <p class="option-desc">${o.desc}</p>
         <div class="badges">
           <span class="badge">Price: ${pretty}</span>
-          ${country==='MX' ? '<span class="badge">×20 (MX)</span>' : ''}
-          ${country==='CA' ? '<span class="badge">+30% (CA)</span>' : ''}
         </div>
       </div>
     </label>
@@ -140,7 +138,7 @@ function updateSpots() {
 
 function updatePriceHint() {
   if (!selectedAccountId) {
-    priceHint.textContent = 'Price shown after you select a parking lot (varies by currency). MX ×20, CA +30%.';
+    priceHint.textContent = 'Price shown after you select a parking lot (varies by currency).';
     return;
   }
   const info = accountsIndex.get(selectedAccountId);
@@ -158,7 +156,7 @@ function updatePriceHint() {
   }
   if (country === 'MX') base = base * 20;
   else if (country === 'CA') base = Math.round(base * 1.3);
-  priceHint.textContent = `Selected: ${spot.label} — ${(base/100).toFixed(2)} ${currencyLabels[currency]} (${country==='MX'?'×20 MX':'CA'===country?'+30% CA':'US'})`;
+  priceHint.textContent = `Selected: ${spot.label} — ${(base/100).toFixed(2)} ${currencyLabels[currency]} (${country==='MX'?'MX':'CA'===country?'CA':'US'})`;
 }
 
 function enableStartIfReady() {

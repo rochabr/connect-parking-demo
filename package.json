@@ -2,7 +2,7 @@
   "name": "connect-parking-demo",
   "version": "1.0.0",
   "type": "module",
-  "description": "Stripe Connect + Embedded Checkout demo (customers + connected accounts picker)",
+  "description": "Stripe Connect",
   "main": "server/index.js",
   "scripts": {
     "dev:server": "node server/index.js",
