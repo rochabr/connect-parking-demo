@@ -20,7 +20,7 @@
     <!-- Page logic -->
     <script type="module" src="./payments.js" defer></script>
   </head>
-  <body>
+<body class="payments-page">
     <!-- Header matches your main page -->
     <header class="site-header">
       <div class="container header-inner">
@@ -53,13 +53,20 @@
         <p class="hint">Select a parking lot (Connected account) to view and manage its payments.</p>
       </section>
 
-      <!-- Payments embedded component -->
-      <section class="section-card">
-        
-        <div id="container" class="checkout-frame" style="min-height:560px; padding:0;"></div>
-        <div id="error" class="hint" hidden>Something went wrong. Check console/server logs.</div>
-      </section>
-    </main>
+     <!-- Payments embedded component -->
+<!-- Payments embedded component -->
+<section class="section-card payments-shell">
+  <div class="frame-toolbar">
+    <span class="pill">Payments</span>
+    <span class="pill subtle">Desktop</span>
+    <span class="pill subtle" id="localePill">English (United States)</span>
+    <span class="pill subtle">Default</span>
+  </div>
+
+  <div id="container" class="payments-frame"></div>
+  <div id="error" class="hint" hidden>Something went wrong. Check console/server logs.</div>
+</section>
+
 
     <footer class="site-footer">
       <div class="container">

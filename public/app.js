@@ -107,18 +107,7 @@ function cardSpot(o, currency, country) {
   const pretty = adjusted != null ? `${(adjusted/100).toFixed(2)} ${currencyLabels[currency] || ''}` : '—';
   const idAttr = `spot_${o.key}`;
   const isDisabled = minor == null || !currency;
-  // return `
-  //   <label class="card-item" for="${idAttr}">
-  //     <input class="card-radio" type="radio" name="spot" id="${idAttr}" value="${o.key}" ${selectedSpotKey===o.key?'checked':''} ${isDisabled?'disabled':''}/>
-  //     <div>
-  //       <p class="card-title">${o.label}</p>
-  //       <p class="option-desc">${o.desc}</p>
-  //       <div class="badges">
-  //         <span class="badge">Price: ${pretty}</span>
-  //       </div>
-  //     </div>
-  //   </label>
-  // `;
+
 return `
   <label class="card-item select-tile" for="${idAttr}">
       <input class="card-radio" type="radio" name="spot" id="${idAttr}" value="${o.key}" ${selectedSpotKey===o.key?'checked':''} />

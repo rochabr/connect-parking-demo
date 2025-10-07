@@ -147,14 +147,20 @@ async function initPaymentsForAccount(accountId) {
         return undefined;
       }
     };
+document.getElementById('localePill').textContent = locale === 'es' ? 'Español (México)' : 'English (United States)';
 
-    // Pass `locale` to Connect.js
-    connectInstance = await loadConnectAndInitialize({
-      publishableKey,
-      fetchClientSecret,
-      locale, // ← es for MX, en otherwise
-      appearance: { variables: { colorPrimary: '#22c55e', borderRadius: '12px' } },
-    });
+connectInstance = await loadConnectAndInitialize({
+  publishableKey,
+  fetchClientSecret,
+  locale,
+  appearance: {
+    variables: {
+      colorPrimary: '#2563eb',   // Stripe blue
+      borderRadius: '12px',
+      fontFamily: 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial',
+    },
+  },
+});
 
     paymentsElement = connectInstance.create('payments');
     containerEl.innerHTML = '';

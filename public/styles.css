@@ -131,33 +131,73 @@ body{
   margin-top: 4px;
 }
 
-/* --- Layout for embedded Stripe components --- */
-.checkout-frame,
-#container {
+/* Checkout (embedded Checkout) */
+.checkout-frame {
   background: #ffffff;
   border-radius: 16px;
-  padding: 0;                   /* no padding inside, to keep iframe full width */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 0;
   min-height: 560px;
-  overflow: hidden;              /* keeps rounded corners clean */
-}
-
-/* add padding outside using a wrapper section */
-.section-card .checkout-frame,
-.section-card #container {
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  overflow: hidden;
   margin: 20px auto;
-  max-width: 960px;              /* comfortable max width */
+  max-width: 880px; /* checkout can be narrower */
 }
-
-/* iframe sizing */
-.checkout-frame iframe,
-#container iframe {
+.checkout-frame iframe {
   width: 100%;
   height: 100%;
-  border: none;
+  border: 0;
   display: block;
-  background: transparent;
 }
+
+/* Payments (embedded Payments) */
+/* Page canvas closer to the mock */
+body.payments-page .container { padding-top: 24px; }
+.section-card.payments-shell {
+  background: #f4f6f8;                /* soft gray around the card */
+  border: 1px solid #e7ebf0;
+  border-radius: 22px;
+  padding: 18px 18px 24px;
+  box-shadow: 0 18px 40px rgba(3, 19, 34, 0.08);
+}
+
+/* Toolbar “chips” above the table */
+.frame-toolbar{
+  display:flex; gap:10px; align-items:center;
+  padding: 6px 8px 14px 8px;
+}
+.pill{
+  background:#eef2ff; color:#334155; border:1px solid #e2e8ff;
+  padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700;
+}
+.pill.subtle{
+  background:#f1f5f9; color:#475569; border-color:#e2e8f0;
+}
+
+/* Payments iframe container (wide, rounded, no inner padding) */
+.payments-frame{
+  background:#ffffff;
+  border-radius: 18px;
+  padding: 0;
+  min-height: 640px;
+  overflow: hidden;
+  margin: 0 auto;
+  max-width: 1120px; /* wider so table breathes */
+  border: 1px solid #e9edf3;
+}
+.payments-frame iframe{
+  width: 100%;
+  height: 100%;
+  display:block;
+  border:0;
+}
+
+/* Optional: tighten on small screens */
+@media (max-width: 900px){
+  .payments-frame{ max-width: 100%; border-radius: 14px; }
+  .section-card.payments-shell{ border-radius: 16px; }
+}
+
+
 
 
 /* ==== Footer on dark background ==== */
