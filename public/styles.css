@@ -131,11 +131,34 @@ body{
   margin-top: 4px;
 }
 
-/* ==== Embedded Checkout frame ==== */
-.checkout-frame{
-  border:1px dashed var(--card-border);
-  border-radius:16px; min-height:520px; padding:8px; background:#fafbff
+/* --- Layout for embedded Stripe components --- */
+.checkout-frame,
+#container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 0;                   /* no padding inside, to keep iframe full width */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  min-height: 560px;
+  overflow: hidden;              /* keeps rounded corners clean */
 }
+
+/* add padding outside using a wrapper section */
+.section-card .checkout-frame,
+.section-card #container {
+  margin: 20px auto;
+  max-width: 960px;              /* comfortable max width */
+}
+
+/* iframe sizing */
+.checkout-frame iframe,
+#container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: transparent;
+}
+
 
 /* ==== Footer on dark background ==== */
 .site-footer{
