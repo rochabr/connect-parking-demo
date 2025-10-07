@@ -44,41 +44,57 @@ async function initStripe() {
 }
 
 function cardCustomer(c) {
-  const sub = [c.name, c.email, c.id].filter(Boolean).slice(0,2).join(' • ');
   const idAttr = `cust_${c.id}`;
+  const title = c.name || c.email || 'Customer';
+  const sub = c.id;//[c.email, c.id].filter(Boolean).join(' • ');
   return `
-    <label class="card-item" for="${idAttr}">
-      <input class="card-radio" type="radio" name="customer" id="${idAttr}" value="${c.id}" ${selectedCustomerId===c.id?'checked':''} />
+    <label class="card-item select-tile" for="${idAttr}">
+      <input class="card-radio" type="radio" name="customer" id="${idAttr}" value="${c.id}" ${selectedCustomerId === c.id ? 'checked' : ''} />
       <div>
-        <p class="card-title">${c.name || c.email || c.id}</p>
-        <p class="card-sub">${sub}</p>
-        <div class="badges">
-          <span class="badge">Customer</span>
-        </div>
+        <p class="tile-kpi">
+          <span>${title}</span>
+        </p>
+        <p class="tile-sub">${sub || 'Registered customer'}</p>
+      <span class="badge">Customer</span>
       </div>
     </label>
   `;
 }
 
+
 function cardAccount(a) {
   const idAttr = `acct_${a.id}`;
   const cur = (a.default_currency || countryToCurrency[a.country] || '').toUpperCase();
   const flag = flags[a.country] || '🏳️';
-  const sub = `${flag} ${a.country} • ${cur || '—'} • ${a.id}`;
+  const sub = `${flag} ${a.country}${cur ? ' • '+cur : ''}`;
   return `
-    <label class="card-item" for="${idAttr}">
+    <label class="card-item select-tile" for="${idAttr}">
       <input class="card-radio" type="radio" name="account" id="${idAttr}" value="${a.id}" ${selectedAccountId===a.id?'checked':''} />
       <div>
-        <p class="card-title">${a.name}</p>
-        <p class="card-sub">${sub}</p>
-        <div class="badges">
-          <span class="badge">Connected account</span>
-          ${cur ? `<span class="badge">${cur}</span>` : ''}
-        </div>
+       <p class="tile-kpi">
+          <span>${a.name}</span>
+        </p>
+        <p class="tile-sub">${sub}</p>
+        <span class="badge">Connected Account</span>
       </div>
     </label>
   `;
 }
+
+function applySelectedFallback(name){
+  const supportsHas = CSS && CSS.supports && CSS.supports('selector(:has(*))');
+  if (supportsHas) return; // modern browsers use :has
+  const nodes = document.querySelectorAll(`input[name="${name}"]`);
+  nodes.forEach(n => {
+    n.addEventListener('change', () => {
+      nodes.forEach(m => m.closest('.select-tile')?.classList.remove('is-selected'));
+      n.closest('.select-tile')?.classList.add('is-selected');
+    });
+    if (n.checked) n.closest('.select-tile')?.classList.add('is-selected');
+  });
+}
+
+
 
 function cardSpot(o, currency, country) {
   // compute adjusted price based on country rule
@@ -91,37 +107,50 @@ function cardSpot(o, currency, country) {
   const pretty = adjusted != null ? `${(adjusted/100).toFixed(2)} ${currencyLabels[currency] || ''}` : '—';
   const idAttr = `spot_${o.key}`;
   const isDisabled = minor == null || !currency;
-  return `
-    <label class="card-item" for="${idAttr}">
-      <input class="card-radio" type="radio" name="spot" id="${idAttr}" value="${o.key}" ${selectedSpotKey===o.key?'checked':''} ${isDisabled?'disabled':''}/>
+  // return `
+  //   <label class="card-item" for="${idAttr}">
+  //     <input class="card-radio" type="radio" name="spot" id="${idAttr}" value="${o.key}" ${selectedSpotKey===o.key?'checked':''} ${isDisabled?'disabled':''}/>
+  //     <div>
+  //       <p class="card-title">${o.label}</p>
+  //       <p class="option-desc">${o.desc}</p>
+  //       <div class="badges">
+  //         <span class="badge">Price: ${pretty}</span>
+  //       </div>
+  //     </div>
+  //   </label>
+  // `;
+return `
+  <label class="card-item select-tile" for="${idAttr}">
+      <input class="card-radio" type="radio" name="spot" id="${idAttr}" value="${o.key}" ${selectedSpotKey===o.key?'checked':''} />
       <div>
-        <p class="card-title">${o.label}</p>
-        <p class="option-desc">${o.desc}</p>
-        <div class="badges">
-          <span class="badge">Price: ${pretty}</span>
-        </div>
+       <p class="tile-kpi">
+          <span>${o.label}</span>
+        </p>
+        <p class="tile-sub">${o.desc}</p>
+        <span class="badge">Price: ${pretty}</span>
       </div>
     </label>
-  `;
+    `;
 }
 
 function renderCustomers(list = customers) {
   customerGrid.innerHTML = list.map(cardCustomer).join('') || `<div class="hint">No customers found.</div>`;
-  // bind
   list.forEach(c => {
     const el = document.getElementById(`cust_${c.id}`);
     if (el) el.addEventListener('change', () => { selectedCustomerId = c.id; enableStartIfReady(); });
   });
+  applySelectedFallback('customer');
 }
 
 function renderAccounts(list = accounts) {
   accountGrid.innerHTML = list.map(cardAccount).join('') || `<div class="hint">No parking lots found.</div>`;
-  // bind
   list.forEach(a => {
     const el = document.getElementById(`acct_${a.id}`);
     if (el) el.addEventListener('change', () => { selectedAccountId = a.id; updateSpots(); enableStartIfReady(); });
   });
+  applySelectedFallback('account');
 }
+
 
 function updateSpots() {
   const info = accountsIndex.get(selectedAccountId) || {};

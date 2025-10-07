@@ -206,6 +206,33 @@ app.get('/api/checkout/session/:id', async (req, res) => {
   }
 });
 
+// POST /api/connect/account-session
+app.post('/api/connect/account-session', async (req, res) => {
+  try {
+    const { accountId } = req.body || {};
+    if (!accountId) return res.status(400).json({ error: 'accountId is required' });
+    const accountSession = await stripe.accountSessions.create({
+      account: accountId,
+      components: {
+        payments: {
+          enabled: true,
+          features: {
+            refund_management: true,
+            dispute_management: true,
+            capture_payments: true,
+            destination_on_behalf_of_charge_management: true,
+          },
+        },
+      },
+    });
+    res.json({ client_secret: accountSession.client_secret });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err?.message || 'Failed to create account session' });
+  }
+});
+
+
 app.listen(PORT, () => {
   console.log(`API server running on http://localhost:${PORT}`);
 });

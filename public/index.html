@@ -2,33 +2,54 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Parking Checkout (Connect)</title>
+    <title>JustPark(demo)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./styles.css" />
     <script src="https://js.stripe.com/v3/"></script>
   </head>
   <body>
     <header class="site-header">
-      <div class="container header-inner">
-        <div class="brand">
-          <div class="logo-dot"></div>
-          <div>
-            <div class="brand-title">Parking Checkout</div>
-            <div class="brand-sub">Stripe Connect demo</div>
-          </div>
-        </div>
-        <nav class="nav">
-          <a class="nav-link" href="./return.html">Return page</a>
-          <a class="nav-link" target="_blank" href="https://dashboard.stripe.com/test">Stripe Dashboard</a>
-        </nav>
-      </div>
-    </header>
+  <div class="container header-inner">
+    <!-- Left: Logo -->
+    <a href="/" class="brand">
+      <img
+        src="https://support-us.justpark.com/hc/theming_assets/01JDJABSECHJJ4C56H23Z3MD9Z"
+        alt="JustPark Logo"
+        class="brand-logo"
+      />
+    </a>
+
+    <!-- Right: Navigation -->
+    <nav class="nav">
+      <a class="nav-link" target="_blank" href="https://dashboard.stripe.com/test">Stripe Dashboard</a>
+      <a class="nav-link" href="./payments.html">Payment Details</a>
+    </nav>
+  </div>
+</header>
+
 
     <main class="container">
+      <section class="hero">
+  <div>
+    <h1>Transform the Parking Experience</h1>
+    <p>For events, in private garages or on-street, we help drivers find, book and pay for parking — and give businesses a data-driven platform to manage spaces and optimise returns.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">$1Bn+</div><div class="sub">annual transaction value</div></div>
+      <div class="stat"><div class="num">40M+</div><div class="sub">cars parked annually</div></div>
+      <div class="stat"><div class="num">450+</div><div class="sub">locations</div></div>
+    </div>
+  </div>
+  <div>
+    <img src="https://images.justpark.com/eyJidWNrZXQiOiJqdXN0cGFyay1pbWFnZS1yZXNpemVyLXByb2R1Y3Rpb24iLCJrZXkiOiJiMmItaG9tZXBhZ2UvaGVhZGVyLWltYWdlLXVzLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MjI4MCwiaGVpZ2h0IjoxODIxLjM0NTk0Mzk3OTYyODgsImZpdCI6ImNvdmVyIn0sImpwZWciOnsicXVhbGl0eSI6OTB9LCJ3ZWJwIjp7InF1YWxpdHkiOjkwfX19" alt="Stadium parking">
+  </div>
+</section>
+
       <!-- Step 1: Customer -->
       <section class="section-card">
         <div class="section-header">
-          <h2 class="section-title">1. Choose customer</h2>
+          <h2 class="section-step-title">
+  <span class="step-number">Choose Customer</span>
+</h2>
           <div class="section-actions">
             <button id="refreshCustomers" class="btn ghost" title="Refresh">↻</button>
           </div>
@@ -40,7 +61,9 @@
       <!-- Step 2: Parking lot (Connected account) -->
       <section class="section-card">
         <div class="section-header">
-          <h2 class="section-title">2. Select parking lot</h2>
+          <h2 class="section-step-title">
+  <span class="step-number">Select Parking Lot</span>
+</h2>
           <div class="section-actions">
             <button id="refreshAccounts" class="btn ghost" title="Refresh">↻</button>
           </div>
@@ -52,21 +75,22 @@
       <!-- Step 3: Parking spot (product option) -->
       <section class="section-card">
         <div class="section-header">
-          <h2 class="section-title">3. Choose parking spot</h2>
-        </div>
+<h2 class="section-step-title">
+  <span class="step-number">Choose Parking Spot</span>
+</h2>        </div>
         <div id="spotGrid" class="grid grid-3"></div>
-        <p id="priceHint" class="price-hint">Price shown after you select a parking lot (varies by currency). MX ×20, CA +30%.</p>
+        <p id="priceHint" class="price-hint">Price shown after you select a parking lot (varies by currency).</p>
       </section>
 
       <!-- Checkout -->
-      <section class="section-card">
-        <div class="cta-row">
-          <button id="start" class="btn primary">Start / Update checkout</button>
-          <span id="status" class="status-text"></span>
-        </div>
-        <div id="checkout" class="checkout-frame"></div>
-      </section>
-    </main>
+<section class="section-card">
+  <div class="cta-row center">
+    <button id="start" class="btn primary">Start / Update checkout</button>
+    <span id="status" class="status-text"></span>
+  </div>
+  <div id="checkout" class="checkout-frame"></div>
+</section>
+
 
     <footer class="site-footer">
       <div class="container">
