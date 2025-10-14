@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Payment Details • Parking (Connect)</title>
+    <title>Payout Details • Parking (Connect)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Reuse your site styles -->
@@ -18,9 +18,9 @@
     </script>
 
     <!-- Page logic -->
-    <script type="module" src="./payments.js" defer></script>
+    <script type="module" src="./payouts.js" defer></script>
   </head>
-<body class="payments-page">
+<body class="payouts-page">
     <!-- Header matches your main page -->
     <header class="site-header">
       <div class="container header-inner">
@@ -52,20 +52,20 @@
           </div>
         </div>
         <div id="accountGrid" class="grid"></div>
-        <p class="hint">Select a parking lot (Connected account) to view and manage its payments.</p>
+        <p class="hint">Select a parking lot (Connected account) to view and manage its payouts.</p>
       </section>
 
-     <!-- Payments embedded component -->
-<!-- Payments embedded component -->
-<section class="section-card payments-shell">
+     <!-- Payouts embedded component -->
+<!-- Payouts embedded component -->
+<section class="section-card payouts-shell">
   <div class="frame-toolbar">
-    <span class="pill">Payments</span>
+    <span class="pill">Payouts</span>
     <span class="pill subtle">Desktop</span>
     <span class="pill subtle" id="localePill">English (United States)</span>
     <span class="pill subtle">Default</span>
   </div>
 
-  <div id="container" class="payments-frame"></div>
+  <div id="container" class="payouts-frame"></div>
   <div id="error" class="hint" hidden>Something went wrong. Check console/server logs.</div>
 </section>
 
@@ -74,7 +74,7 @@
       <div class="container">
         <div class="foot-left">© Demo • For testing only</div>
         <div class="foot-right">
-          <span class="chip">Embedded Payments</span>
+          <span class="chip">Embedded Payouts</span>
           <span class="chip">Refunds</span>
           <span class="chip">Disputes</span>
         </div>

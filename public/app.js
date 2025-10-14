@@ -19,6 +19,7 @@ const SPOT_OPTIONS = [
   { key: 'standard', label: 'Standard', desc: 'Open-air, general area', base: { usd: 1500, cad: 1500, mxn: 1500 } },
   { key: 'covered',  label: 'Covered',  desc: 'Covered spot near main gate', base: { usd: 2000, cad: 2000, mxn: 2000 } },
   { key: 'vip',      label: 'VIP',      desc: 'Closest to entrance',        base: { usd: 3000, cad: 3000, mxn: 3000 } },
+  { key: 'flying_car',      label: 'Flying car',      desc: 'Up in the air',        base: { usd: 30000, cad: 30000, mxn: 300000 } },
 ];
 
 let stripe = null;

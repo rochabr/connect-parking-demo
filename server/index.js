@@ -92,6 +92,11 @@ const SPOT_OPTIONS = {
     amounts: { usd: 3000, cad: 3000, mxn: 3000 },
     description: 'VIP row, closest to entrance',
   },
+  flying_car: {
+    label: 'Flying Car',
+    amounts: { usd: 30000, cad: 30000, mxn: 300000 },
+    description: 'Up in the air',
+  }, 
 };
 
 // Create Checkout Session (Embedded) for selected spot option
@@ -131,9 +136,9 @@ app.post('/api/checkout/session', async (req, res) => {
 
     // 🚀 Apply your logic
     if (country === 'MX') {
-    unit_amount = unit_amount * 20;
+      unit_amount = unit_amount * 20;
     } else if (country === 'CA') {
-    unit_amount = Math.round(unit_amount * 1.3);
+      unit_amount = Math.round(unit_amount * 1.3);
     } else {
         unit_amount = option.amounts[currency];
     }
@@ -221,6 +226,15 @@ app.post('/api/connect/account-session', async (req, res) => {
             dispute_management: true,
             capture_payments: true,
             destination_on_behalf_of_charge_management: true,
+          },
+        },
+         payouts: {
+          enabled: true,
+          features: {
+            instant_payouts: true,
+            standard_payouts: true,
+            edit_payout_schedule: true,
+            external_account_collection: true,
           },
         },
       },

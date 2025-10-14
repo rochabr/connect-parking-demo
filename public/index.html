@@ -23,6 +23,7 @@
     <nav class="nav">
       <a class="nav-link" target="_blank" href="https://dashboard.stripe.com/test">Stripe Dashboard</a>
       <a class="nav-link" href="./payments.html">Payment Details</a>
+      <a class="nav-link" href="./payouts.html">Payout Details</a>
     </nav>
   </div>
 </header>
@@ -44,6 +45,9 @@
   </div>
 </section>
 
+<div class="layout-2col">
+    <!-- Left: selectors -->
+    <div class="col-left">
       <!-- Step 1: Customer -->
       <section class="section-card">
         <div class="section-header">
@@ -81,16 +85,21 @@
         <div id="spotGrid" class="grid grid-3"></div>
         <p id="priceHint" class="price-hint">Price shown after you select a parking lot (varies by currency).</p>
       </section>
+      </div>
 
+       <aside class="col-right">
       <!-- Checkout -->
-<section class="section-card">
+<section class="section-card checkout-card">
   <div class="cta-row center">
     <button id="start" class="btn primary">Start / Update checkout</button>
     <span id="status" class="status-text"></span>
   </div>
   <div id="checkout" class="checkout-frame"></div>
 </section>
+</aside>
+ </div>
 
+ 
 
     <footer class="site-footer">
       <div class="container">
